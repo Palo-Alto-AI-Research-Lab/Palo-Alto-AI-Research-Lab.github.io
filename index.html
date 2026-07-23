@@ -246,8 +246,7 @@ SUMMARY
     for(var i=0;i<upto;i++){
       var L=esc(lines[i]);
       if(L.indexOf('[PASS]')>=0||L.indexOf('ALL SCENARIOS PASS')>=0) L='<span class="ok">'+L+'</span>';
-      out+=L+'
-';
+      out+=L+String.fromCharCode(10);
     }
     el.innerHTML=out;
     el.scrollTop=el.scrollHeight;
