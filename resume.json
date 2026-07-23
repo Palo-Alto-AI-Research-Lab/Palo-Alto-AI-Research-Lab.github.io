@@ -2,10 +2,10 @@
   "$schema": "https://raw.githubusercontent.com/jsonresume/resume-schema/v1.0.0/schema.json",
   "basics": {
     "name": "Anton Dziatkovskii",
-    "label": "Developer activation for frontier platforms · founder, Palo Alto AI Research Lab",
+    "label": "Developer activation for frontier platforms · founder, Palo Alto AI Research Lab (an independent lab)",
     "email": "a@platinum.fund",
     "url": "https://palo-alto-ai-research-lab.github.io/",
-    "summary": "I've done developer activation for a frontier platform before — when smart contracts were where LLM agents are now. Classically trained in CS security (MEPhI), 7+ years venture founder, publishing researcher on multi-agent stability. Today I run a production multi-machine Claude fleet in public — and write the operating manual as I go. Built with Claude as implementation collaborator; I own problem framing, architecture, evaluation, product decisions and final QA.",
+    "summary": "I've done developer activation for a frontier platform before — when smart contracts were where LLM agents are now. Classically trained in CS security (MEPhI), 7+ years venture founder, author of two preprints on multi-agent stability. Today I run a production multi-machine Claude fleet in public — and write the operating manual as I go. Built with Claude as implementation collaborator; I own problem framing, architecture, evaluation, product decisions and final QA.",
     "location": { "city": "Bay Area", "countryCode": "US" },
     "profiles": [
       { "network": "GitHub", "username": "Palo-Alto-AI-Research-Lab", "url": "https://github.com/Palo-Alto-AI-Research-Lab" },
@@ -23,10 +23,24 @@
       "summary": "Production multi-machine Claude fleet run in public: claude-consensus (reproducible multi-machine agent consensus, offline demo, published evals, FAILURE-MODES.md), the operating manual written day by day (相棒 AIBŌ · The Partner)."
     },
     {
-      "name": "Platinum VC & Incubator",
+      "name": "Platinum Software Development Company / Platinum VC & Incubator",
       "position": "Co-Founder",
       "startDate": "2015",
-      "summary": "VC fund ($35M AUM), syndicate of 250 VCs and angels, dev incubator for APAC Web3 projects with 40+ engineers. Solidity curricula, hackathons, cohorts and incubations. Advisor to enterprise subsidiaries of Foxconn and ANA Airlines."
+      "summary": "Built Solidity curricula and scaled a distributed engineering org to 40+ developers across APAC. Ran hackathons, cohorts and incubations for Web3 builders — from first workshop to shipped mainnet product. Advisor to enterprise subsidiaries of Foxconn and ANA Airlines."
+    },
+    {
+      "name": "Everex (Singapore)",
+      "position": "Chief Engineer, Lending & Risk Management",
+      "startDate": "2017",
+      "endDate": "2018",
+      "summary": "Blockchain credit scoring, stable-value payments."
+    },
+    {
+      "name": "Merlion",
+      "position": "Sales & CRM-ERP Director",
+      "startDate": "2006",
+      "endDate": "2015",
+      "summary": "One of the largest private IT distributors in Eastern Europe."
     }
   ],
   "education": [
@@ -37,7 +51,7 @@
   "publications": [
     { "name": "Homeostatic Governance for multi-agent systems (three-circuit control)", "releaseDate": "2026", "summary": "Preprint, arXiv submission in progress." },
     { "name": "Le Chatelier Tokenomics (multi-asset coupled equilibria)", "releaseDate": "2026", "summary": "Preprint, arXiv submission in progress." },
-    { "name": "~20 academic papers on blockchain, AI and education", "url": "https://scholar.google.com/citations?user=b8gKHiMAAAAJ" }
+    { "name": "50+ published items, 2018–2026 (139 citations, h-index 7)", "url": "https://palo-alto-ai-research-lab.github.io/scholar/publications/" }
   ],
   "languages": [
     { "language": "English", "fluency": "Working proficiency" },

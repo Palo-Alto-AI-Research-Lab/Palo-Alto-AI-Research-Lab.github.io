@@ -57,6 +57,14 @@
   a { color:var(--accent); }
   .note { font-size:.9em; color:var(--muted); border-left:3px solid var(--border); padding-left:12px; }
   .contact a { margin-right:14px; white-space:nowrap; }
+  .term { background:#0c1016; color:#c9d6e2; border:1px solid #30363d; border-radius:10px;
+          font:12px/1.45 ui-monospace,Consolas,"Courier New",monospace; padding:14px 16px;
+          height:300px; overflow-y:auto; white-space:pre; margin:0 0 6px; }
+  .term .ok { color:#3fb950; }
+  .termbar { display:flex; justify-content:space-between; align-items:center; font-size:.85em;
+             color:var(--muted); margin:0 0 12px; }
+  .termbar button { background:none; border:1px solid var(--border); border-radius:6px;
+                    color:var(--muted); padding:3px 10px; cursor:pointer; font-size:1em; }
   footer { margin-top:48px; font-size:.85em; color:var(--muted); }
 </style>
 </head>
@@ -67,7 +75,7 @@
   <p class="lede">Classically trained in CS security (MEPhI), 7+ years venture founder, publishing researcher on multi-agent stability. Today I run a production multi-machine Claude fleet in public — and write the operating manual as I go.</p>
 
   <div class="cta">
-    <a class="primary" href="https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus">See the system → claude-consensus</a>
+    <a class="primary" href="https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus">Reproduce the system in 15 min → claude-consensus (MIT · offline demo · 9 documented failure modes)</a>
     <a href="https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus#the-method">Read the method → preprints</a>
     <a href="https://github.com/Palo-Alto-AI-Research-Lab?tab=repositories">GitHub → all repos</a>
     <a href="/scholar/">Academic profile → publications &amp; research</a>
@@ -78,6 +86,8 @@
     <b><a href="https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus">claude-consensus</a></b> — multi-machine agent consensus you can reproduce in 15 minutes.
     <div class="sub">Offline demo, published evals, honest FAILURE-MODES.md (9 documented failure regimes). Theory shipped to prod.</div>
   </div>
+  <div class="termbar"><span>Real output of <code>python demo/demo.py</code> — captured 2026-07-22, stock Windows laptop, no network, no API key.</span><button id="termskip" type="button">show full log</button></div>
+  <div class="term" id="term" aria-label="Terminal recording of the offline demo"></div>
   <div class="proof">
     <b>The method behind it</b> — two preprints: <i>Homeostatic Governance for multi-agent systems</i> (three-circuit control: main / adaptive / protective) and <i>Le Chatelier Tokenomics</i> (multi-asset coupled equilibria).
     <div class="sub">The repo is the reference implementation of the papers. arXiv submission in progress — links will land here the day they go live.</div>
@@ -85,6 +95,7 @@
   <div class="proof">
     <b><a href="https://github.com/Palo-Alto-AI-Research-Lab/the-journey">相棒 AIBŌ · The Partner</a></b> — a book written from inside a human+AI company, documenting the method day by day.
   </div>
+  <p class="note">How this was built: with Claude as implementation collaborator — and that is the point. I retain full ownership of problem framing, architecture, evaluation and final QA; the repos publish the evals, the failure modes and the daily log, so you can audit the division of labor yourself. Metrics are published or absent.</p>
 
   <h2>Research (selected, peer-reviewed)</h2>
   <ul>
@@ -96,19 +107,21 @@
 
   <h2>Developer education track record</h2>
   <ul>
-    <li>Built Solidity curricula and ran a dev incubator with 40+ engineers across APAC when Ethereum was the frontier platform.</li>
-    <li>Ran hackathons, cohorts and incubations for Web3 builders (Platinum VC &amp; Incubator: $35M AUM, syndicate of 250 VCs and angels).</li>
+    <li>Built Solidity curricula and scaled a distributed engineering org to 40+ developers across APAC when Ethereum was the frontier platform.</li>
+    <li>Ran hackathons, cohorts and incubations for Web3 builders at Platinum Software Development Company &amp; Incubator — from first workshop to shipped mainnet product.</li>
     <li>Advisor to enterprise subsidiaries of Foxconn and ANA Airlines.</li>
   </ul>
 
   <h2>Writing &amp; speaking</h2>
-  <p>Hackernoon column (CBDC, stablecoin mechanics, NFT gas optimization…) · 200+ posts across channels · interviews in Japanese crypto press (Crypto Times ×3) · <a href="/scholar/publications/">50+ academic publications</a>, PhD in Education (IT) — full academic profile at <a href="/scholar/">/scholar/</a>.</p>
+  <ul>
+    <li><a href="https://hackernoon.com/no-sandwich-please-popular-defi-attack-strategy-analysis-jk1734rf">No sandwich, please! Popular DeFi attack strategy analysis</a> — HackerNoon, 2021</li>
+    <li><a href="https://hackernoon.com/the-strengths-and-weaknesses-of-defi-price-oracles-x7l35ui">The strengths and weaknesses of DeFi price oracles</a> — HackerNoon, 2021</li>
+    <li><a href="https://hackernoon.com/understanding-the-zero-knowledge-proof-method">Understanding the zero-knowledge proof method</a> — HackerNoon, 2021</li>
+  </ul>
+  <p>HackerNoon column (34 essays: DeFi mechanics, CBDC, NFT gas optimization) · interviews in Japanese crypto press (Crypto Times ×3) · <a href="/scholar/publications/">50+ academic publications</a>, PhD in Education (IT) — full academic profile at <a href="/scholar/">/scholar/</a>.</p>
 
   <h2>Reach</h2>
   <p>Based in the Bay Area, frequent in Europe via Lisbon, 15 years lived across APAC (Japan, Korea, Thailand, Malaysia, Singapore, HK, Australia). Working languages: EN · RU · Ukrainian · Polish — a live bridge to the Eastern-European engineering diaspora.</p>
-
-  <h2>AI collaboration policy (honest by design)</h2>
-  <p class="note">Built with Claude as implementation collaborator. I own problem framing, architecture, evaluation, product decisions and final QA. No fabricated experience; metrics are published or absent.</p>
 
   <h2>Contact</h2>
   <p class="contact">
@@ -119,7 +132,131 @@
     <a href="https://wa.me/13412229178">WhatsApp</a>
   </p>
 
-  <footer>© 2026 Anton Dziatkovskii · Palo Alto AI Research Lab · <a href="resume.json">resume.json</a></footer>
+  <footer>© 2026 Anton Dziatkovskii · Palo Alto AI Research Lab (an independent lab) · <a href="resume.pdf">resume.pdf</a> · <a href="resume.json">resume.json</a></footer>
 </main>
+<script type="text/plain" id="demolog">claude-consensus demo -- offline, 0 tokens, stdlib only
+engine: reference\consensus.py
+python: 3.12.10
+
+========================================================================
+A. HAPPY PATH  propose -> counter -> accept -> commit -> verify x2
+========================================================================
+
+  machine   verb      wall/ms  exit  result
+  --------------------------------------------------------------------
+  LAPTOP-2  propose     588.6  0     PROPOSED #4be4dd8d tier=0: adopt night
+  HUB-1     respond     640.6  0     COUNTER #4be4dd8d: agree, but run it a
+  LAPTOP-2  respond     565.2  0     ACCEPT #4be4dd8d: 04:00 works
+  HUB-1     commit      604.9  0     COMMITTED #4be4dd8d: adopt nightly rei
+  HUB-1     verify      589.7  0     note: you COMMITTED #4be4dd8d -> this 
+  LAPTOP-2  verify      763.7  0     VERIFY #4be4dd8d by LAPTOP-2: confirme
+  --------------------------------------------------------------------
+  TOTAL                3752.7  (6 CLI calls, 0 LLM calls, 0 tokens)
+
+  end-state: 6 events, verifiers=['HUB-1', 'LAPTOP-2'] -> DONE (>=2 distinct, >=1 independent)
+
+========================================================================
+B. HUMAN GATE  Tier-2 auto-escalates; commit REFUSED until approve
+========================================================================
+
+  machine   verb      wall/ms  exit  result
+  --------------------------------------------------------------------
+  HUB-1     propose     751.2  0     PROPOSED #82eacacf tier=2: rotate the 
+  HUB-1     commit      581.9  1     REFUSED: Tier-2 needs a RECORDED human
+  HUB-1     approve     523.2  0     HUMAN-APPROVED #82eacacf: owner approv
+  HUB-1     commit      522.3  0     COMMITTED #82eacacf: rotate the produc
+  HUB-1     verify      575.1  0     note: you COMMITTED #82eacacf -> this 
+  --------------------------------------------------------------------
+  TOTAL                2953.7  (5 CLI calls, 0 LLM calls, 0 tokens)
+
+  end-state: auto-escalated=True  commit-refused-before-approve=True  approved+committed=True -> GATE HELD
+
+========================================================================
+C. TIER-TRIPWIRE  a Tier-0 label on a dangerous verb is force-bumped
+========================================================================
+
+  machine   verb      wall/ms  exit  result
+  --------------------------------------------------------------------
+  HUB-1     propose     557.8  0     ⚠️ TIER-TRIPWIRE: matched 'delete' -> 
+  HUB-1     status      578.0  0     #6bf0322e  [ESCALATED]  tier=2  rounds
+  --------------------------------------------------------------------
+  TOTAL                1135.8  (2 CLI calls, 0 LLM calls, 0 tokens)
+
+  end-state: labelled tier-0, stored tier=2, tripwire-fired=True -> BUMPED + GATED
+
+========================================================================
+D. SPLIT-BRAIN  a partition makes both sides commit -> conflict caught on heal
+========================================================================
+
+  machine   verb      wall/ms  exit  result
+  --------------------------------------------------------------------
+  HUB-1     propose     625.5  0     PROPOSED #f14cb2b6 tier=0: switch embe
+  LAPTOP-2  respond     525.5  0     ACCEPT #f14cb2b6: agreed
+  HUB-1     commit      531.6  0     COMMIT on hub island (partitioned)
+  LAPTOP-2  commit      550.1  0     COMMIT on laptop island (partitioned)
+  HUB-1     tick        748.9  0     #f14cb2b6 SPLIT-BRAIN: committed by HU
+  --------------------------------------------------------------------
+  TOTAL                2981.6  (5 CLI calls, 0 LLM calls, 0 tokens)
+
+  end-state: committers=['HUB-1', 'LAPTOP-2'] (conflict), escalated-for-reconcile=True -> CAUGHT
+
+========================================================================
+E. CORRUPT LINE  garbage in a shard must not eat later events
+========================================================================
+
+  machine   verb      wall/ms  exit  result
+  --------------------------------------------------------------------
+  HUB-1     propose     605.1  0     PROPOSED #e8e112f1 tier=0: add a healt
+  LAPTOP-2  respond     590.1  0     ACCEPT #e8e112f1: ok
+  HUB-1     commit      710.5  0     COMMITTED #e8e112f1: add a health dash
+  HUB-1     status      610.3  0     #e8e112f1  [COMMITTED]  tier=0  rounds
+  --------------------------------------------------------------------
+  TOTAL                2516.0  (4 CLI calls, 0 LLM calls, 0 tokens)
+
+  end-state: corrupt line present in shard=True, COMMIT after it still read=True -> RESILIENT
+
+========================================================================
+CORE COMPUTE  in-process state derivation over 50 proposals (no subprocess)
+========================================================================
+
+  50 proposals / 250 events, merge+derive-all: 6180.2 microseconds/pass
+
+========================================================================
+SUMMARY
+========================================================================
+  [PASS]  A happy-path       3752.7 ms  (6 CLI calls)
+  [PASS]  B human-gate       2953.7 ms  (5 CLI calls)
+  [PASS]  C tripwire         1135.8 ms  (2 CLI calls)
+  [PASS]  D split-brain      2981.6 ms  (5 CLI calls)
+  [PASS]  E corrupt-line     2516.0 ms  (4 CLI calls)
+
+  core compute: 50 proposals / 250 events, merge+derive-all: 6180.2 microseconds/pass
+  LLM calls across the whole demo: 0        tokens: 0
+  every number above is deterministic file I/O + Python startup
+
+  RESULT: ALL SCENARIOS PASS
+</script>
+<script>
+(function(){
+  var el=document.getElementById('term'), btn=document.getElementById('termskip');
+  var lines=document.getElementById('demolog').textContent.replace(/^\n+/,'').split('\n');
+  function esc(s){ return s.replace(/&/g,'&amp;').replace(/</g,'&lt;'); }
+  function paint(upto){
+    var out='';
+    for(var i=0;i<upto;i++){
+      var L=esc(lines[i]);
+      if(L.indexOf('[PASS]')>=0||L.indexOf('ALL SCENARIOS PASS')>=0) L='<span class="ok">'+L+'</span>';
+      out+=L+'
+';
+    }
+    el.innerHTML=out;
+    el.scrollTop=el.scrollHeight;
+  }
+  var reduced=window.matchMedia&&window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if(reduced){ paint(lines.length); btn.style.display='none'; return; }
+  var i=0, t=setInterval(function(){ i++; paint(i); if(i>=lines.length){clearInterval(t); btn.style.display='none';} },140);
+  btn.addEventListener('click',function(){ clearInterval(t); paint(lines.length); btn.style.display='none'; });
+})();
+</script>
 </body>
 </html>
