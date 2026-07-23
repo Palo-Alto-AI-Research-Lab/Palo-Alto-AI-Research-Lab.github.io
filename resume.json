@@ -11,7 +11,9 @@
       { "network": "GitHub", "username": "Palo-Alto-AI-Research-Lab", "url": "https://github.com/Palo-Alto-AI-Research-Lab" },
       { "network": "X", "username": "Tony_Stef_", "url": "https://x.com/Tony_Stef_" },
       { "network": "Google Scholar", "url": "https://scholar.google.com/citations?user=b8gKHiMAAAAJ" },
-      { "network": "ORCID", "url": "https://orcid.org/0000-0001-7408-3054" }
+      { "network": "ORCID", "url": "https://orcid.org/0000-0001-7408-3054" },
+      { "network": "Academia.edu", "url": "https://tylip.academia.edu/AntonDziatkovskii" },
+      { "network": "Wellfound", "username": "anton-dziatkovskii-3", "url": "https://wellfound.com/u/anton-dziatkovskii-3" }
     ]
   },
   "work": [
