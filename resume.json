@@ -9,7 +9,6 @@
     "location": { "city": "Bay Area", "countryCode": "US" },
     "profiles": [
       { "network": "GitHub", "username": "Palo-Alto-AI-Research-Lab", "url": "https://github.com/Palo-Alto-AI-Research-Lab" },
-      { "network": "LinkedIn", "username": "anton-dzyatkovskiy", "url": "https://www.linkedin.com/in/anton-dzyatkovskiy/" },
       { "network": "X", "username": "Tony_Stef_", "url": "https://x.com/Tony_Stef_" },
       { "network": "Google Scholar", "url": "https://scholar.google.com/citations?user=b8gKHiMAAAAJ" },
       { "network": "ORCID", "url": "https://orcid.org/0000-0001-7408-3054" }
