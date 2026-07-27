@@ -6,14 +6,38 @@
     "email": "a@platinum.fund",
     "url": "https://palo-alto-ai-research-lab.github.io/",
     "summary": "I've done developer activation for a frontier platform before — when smart contracts were where LLM agents are now. Classically trained in CS security (MEPhI), 7+ years venture founder, author of two preprints on multi-agent stability. Today I run a production multi-machine Claude fleet in public — and write the operating manual as I go. Built with Claude as implementation collaborator; I own problem framing, architecture, evaluation, product decisions and final QA.",
-    "location": { "city": "Bay Area", "countryCode": "US" },
+    "location": {
+      "city": "Bay Area",
+      "countryCode": "US"
+    },
     "profiles": [
-      { "network": "GitHub", "username": "Palo-Alto-AI-Research-Lab", "url": "https://github.com/Palo-Alto-AI-Research-Lab" },
-      { "network": "X", "username": "Tony_Stef_", "url": "https://x.com/Tony_Stef_" },
-      { "network": "Google Scholar", "url": "https://scholar.google.com/citations?user=b8gKHiMAAAAJ" },
-      { "network": "ORCID", "url": "https://orcid.org/0000-0001-7408-3054" },
-      { "network": "Academia.edu", "url": "https://tylip.academia.edu/AntonDziatkovskii" },
-      { "network": "Wellfound", "username": "anton-dziatkovskii-3", "url": "https://wellfound.com/u/anton-dziatkovskii-3" }
+      {
+        "network": "GitHub",
+        "username": "Palo-Alto-AI-Research-Lab",
+        "url": "https://github.com/Palo-Alto-AI-Research-Lab"
+      },
+      {
+        "network": "X",
+        "username": "Tony_Stef_",
+        "url": "https://x.com/Tony_Stef_"
+      },
+      {
+        "network": "Google Scholar",
+        "url": "https://scholar.google.com/citations?user=b8gKHiMAAAAJ"
+      },
+      {
+        "network": "ORCID",
+        "url": "https://orcid.org/0000-0001-7408-3054"
+      },
+      {
+        "network": "Academia.edu",
+        "url": "https://tylip.academia.edu/AntonDziatkovskii"
+      },
+      {
+        "network": "Wellfound",
+        "username": "anton-dziatkovskii-3",
+        "url": "https://wellfound.com/u/anton-dziatkovskii-3"
+      }
     ]
   },
   "work": [
@@ -21,7 +45,7 @@
       "name": "Palo Alto AI Research Lab",
       "position": "Founder",
       "startDate": "2026-05",
-      "summary": "Production multi-machine Claude fleet run in public: claude-consensus (reproducible multi-machine agent consensus, offline demo, published evals, FAILURE-MODES.md), the operating manual written day by day (相棒 AIBŌ · The Partner)."
+      "summary": "Production multi-machine Claude fleet run in public: claude-consensus (reproducible multi-machine agent consensus, offline demo, published evals, FAILURE-MODES.md), verbatim-citation-gate (zero-token gate + burden-of-proof judge that catches fabricated RAG citations, MIT), the operating manual written day by day (相棒 AIBŌ · The Partner)."
     },
     {
       "name": "Platinum Software Development Company / Platinum VC & Incubator",
@@ -45,19 +69,52 @@
     }
   ],
   "education": [
-    { "institution": "Paris College of International Education", "studyType": "PhD in Education (Information Technologies)", "endDate": "2021-11" },
-    { "institution": "National Research Nuclear University MEPhI", "studyType": "MSc, Computer and Information Systems Security" },
-    { "institution": "National Research Nuclear University MEPhI", "studyType": "BSc, Computer and Information Sciences" }
+    {
+      "institution": "Paris College of International Education",
+      "studyType": "PhD in Education (Information Technologies)",
+      "endDate": "2021-11"
+    },
+    {
+      "institution": "National Research Nuclear University MEPhI",
+      "studyType": "MSc, Computer and Information Systems Security"
+    },
+    {
+      "institution": "National Research Nuclear University MEPhI",
+      "studyType": "BSc, Computer and Information Sciences"
+    }
   ],
   "publications": [
-    { "name": "Homeostatic Governance for multi-agent systems (three-circuit control)", "releaseDate": "2026", "summary": "Preprint, arXiv submission in progress." },
-    { "name": "Le Chatelier Tokenomics (multi-asset coupled equilibria)", "releaseDate": "2026", "summary": "Preprint, arXiv submission in progress." },
-    { "name": "50+ published items, 2018–2026 (139 citations, h-index 7)", "url": "https://palo-alto-ai-research-lab.github.io/scholar/publications/" }
+    {
+      "name": "Homeostatic Governance for multi-agent systems (three-circuit control)",
+      "releaseDate": "2026",
+      "summary": "Preprint, arXiv submission in progress."
+    },
+    {
+      "name": "Le Chatelier Tokenomics (multi-asset coupled equilibria)",
+      "releaseDate": "2026",
+      "summary": "Preprint, arXiv submission in progress."
+    },
+    {
+      "name": "50+ published items, 2018–2026 (137 citations, h-index 7)",
+      "url": "https://palo-alto-ai-research-lab.github.io/scholar/publications/"
+    }
   ],
   "languages": [
-    { "language": "English", "fluency": "Working proficiency" },
-    { "language": "Russian", "fluency": "Native" },
-    { "language": "Ukrainian", "fluency": "Working proficiency" },
-    { "language": "Polish", "fluency": "Working proficiency" }
+    {
+      "language": "English",
+      "fluency": "Working proficiency"
+    },
+    {
+      "language": "Russian",
+      "fluency": "Native"
+    },
+    {
+      "language": "Ukrainian",
+      "fluency": "Working proficiency"
+    },
+    {
+      "language": "Polish",
+      "fluency": "Working proficiency"
+    }
   ]
 }
