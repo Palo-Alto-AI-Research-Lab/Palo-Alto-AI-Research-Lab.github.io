@@ -1,0 +1,41 @@
+# Anton Dziatkovskii — Palo Alto AI Research Lab
+
+> Independent lab running a production multi-machine Claude agent fleet in public,
+> and writing the operating manual as it goes. Founder: Anton Dziatkovskii
+> (publishes academically as Anton Dziatkovskii; ORCID 0000-0001-7408-3054).
+> This file is a site map for AI agents. Links are full URLs. Verified 2026-07-28 (UTC).
+
+## Contact
+
+- WhatsApp: +1 341 222 9178 — https://wa.me/13412229178
+- X: https://x.com/Tony_Stef_
+- Telegram: https://t.me/ClawRus (RU) · https://t.me/ClawEng (EN)
+- Email: mailto:a@platinum.fund
+- Web: https://palo-alto.ai · https://github.com/Palo-Alto-AI-Research-Lab
+
+## Pages
+
+- [START HERE — one page of proof](https://palo-alto-ai-research-lab.github.io/) — track record, flagship repos, publications, contact.
+- [Academic profile](https://palo-alto-ai-research-lab.github.io/scholar/) — publications, citations, research.
+- [Publications](https://palo-alto-ai-research-lab.github.io/scholar/publications/)
+- [Writing](https://palo-alto-ai-research-lab.github.io/scholar/writing/)
+- [Профиль (RU)](https://palo-alto-ai-research-lab.github.io/scholar/ru/)
+- [Resume (PDF)](https://palo-alto-ai-research-lab.github.io/resume.pdf) · [Resume (JSON)](https://palo-alto-ai-research-lab.github.io/resume.json)
+
+## Open-source repositories
+
+- [claude-consensus](https://github.com/Palo-Alto-AI-Research-Lab/claude-consensus) — multi-machine agent consensus (propose/counter/accept/commit), dual-rail bus, ACK discipline, self-healing sync. Offline demo, documented failure modes. MIT.
+- [verbatim-citation-gate](https://github.com/Palo-Alto-AI-Research-Lab/verbatim-citation-gate) — catch fabricated RAG citations before they reach the user: zero-token verbatim gate plus a burden-of-proof judge, framework-agnostic. MIT.
+- [agent-leash](https://github.com/Palo-Alto-AI-Research-Lab/agent-leash) — LEASH-8, an 8-domain control model for AI agents with delegated authority: scorecard, approval-design checklist, plan-vs-authorize pattern. MIT.
+- [claude-bible](https://github.com/Palo-Alto-AI-Research-Lab/claude-bible) — rules-as-files governance for Claude Code: precedence, declined-decisions journal, objection sparring. MIT.
+- [sqlite-graph-memory](https://github.com/Palo-Alto-AI-Research-Lab/sqlite-graph-memory) — graph RAG on SQLite: vector retrieval, curated wikilink graph, cross-encoder rerank, zero-token per-turn memory ledger. MIT.
+- [charm-os](https://github.com/Palo-Alto-AI-Research-Lab/charm-os) — framework to manage humans and AI agents as first-class relationships on a personal second brain, driven by the RDR loop. Apache-2.0.
+- [second-brain-starter-kit](https://github.com/Palo-Alto-AI-Research-Lab/second-brain-starter-kit) — Claude Code as a second brain: skills, a working CRM engine, vault templates, handover map. Method, not data.
+- [clawrush](https://github.com/Palo-Alto-AI-Research-Lab/clawrush) — the English build-in-public diary, longreads and reusable artifacts.
+- [the-journey](https://palo-alto-ai-research-lab.github.io/the-journey/) — a build-in-public book of a founder plus AI collaboration, human and machine readable.
+- [cofounder](https://palo-alto-ai-research-lab.github.io/cofounder/) — the lab's open co-founder call and application form.
+
+## Optional
+
+- [robots.txt](https://palo-alto-ai-research-lab.github.io/robots.txt) — AI crawlers explicitly allowed.
+- [sitemap.xml](https://palo-alto-ai-research-lab.github.io/sitemap.xml)
