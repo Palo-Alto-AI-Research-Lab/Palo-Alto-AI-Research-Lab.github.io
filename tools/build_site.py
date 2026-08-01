@@ -22,6 +22,28 @@ PAGES = ["index.html", "scholar/index.html", "scholar/publications/index.html",
          "scholar/ru/index.html", "scholar/writing/index.html", "contributions/index.html"]
 REQUIRED_LINKS = ["/resume.pdf", "/resume.json", "/scholar/", "/scholar/publications/", "/contributions/"]
 
+SITE = "https://palo-alto-ai-research-lab.github.io"
+
+# Pages living in THIS repository: (url path, file whose git date is the lastmod, changefreq).
+OWN_PAGES = [
+    ("/",                        "index.html",                       "weekly"),
+    ("/contributions/",          "contributions/index.html",         "weekly"),
+    ("/scholar/",                "scholar/index.html",               "monthly"),
+    ("/scholar/publications/",   "scholar/publications/index.html",  "monthly"),
+    ("/scholar/writing/",        "scholar/writing/index.html",       "monthly"),
+    ("/scholar/ru/",             "scholar/ru/index.html",            "monthly"),
+]
+
+# Project pages served from the SAME host out of other repositories. They are part of this
+# site as far as a crawler is concerned, and nothing else would ever list them:
+# (url path, repo, path inside the repo that holds the page, changefreq).
+PROJECT_PAGES = [
+    ("/claude-bible/",           "claude-bible",           "docs", "monthly"),
+    ("/verbatim-citation-gate/", "verbatim-citation-gate", "docs", "monthly"),
+    ("/the-journey/",            "the-journey",            "docs", "weekly"),
+    ("/cofounder/",              "cofounder",              "",     "monthly"),
+]
+
 NAV_EN = ('<div class="sitenav"><b>Anton Dziatkovskii</b> &middot; '
           '<a href="/">Candidate one-pager</a> &middot; '
           '<a href="/resume.pdf">Resume (PDF, ATS)</a> &middot; '
@@ -241,6 +263,69 @@ def patch_counter(items):
         print("WARNING: no <span id=\"prcount\"> in index.html, counter not shown")
 
 
+# ---------------------------------------------------------------- sitemap
+def git_date(rel):
+    """Last commit date of a file in this repo, or None outside a checkout."""
+    try:
+        import subprocess
+        out = subprocess.check_output(
+            ["git", "log", "-1", "--format=%cs", "--", rel], cwd=ROOT,
+            stderr=subprocess.DEVNULL).decode().strip()
+        return out or None
+    except Exception:
+        return None
+
+
+def repo_date(repo, path):
+    """Date of the last commit touching `path` in another repo of the account.
+
+    Anonymous API call. Returns None on any failure -- a sitemap entry with an
+    unknown date is still a valid entry, a wrong date is a lie.
+    """
+    url = "https://api.github.com/repos/%s/%s/commits?per_page=1" % (ACCOUNT, repo)
+    if path:
+        url += "&path=" + path
+    try:
+        req = urllib.request.Request(url, headers={
+            "Accept": "application/vnd.github+json", "User-Agent": "palo-alto-lab-site"})
+        d = json.load(urllib.request.urlopen(req, timeout=30))
+        return d[0]["commit"]["committer"]["date"][:10]
+    except Exception as e:
+        print("  sitemap: no date for %s (%s)" % (repo, e))
+        return None
+
+
+def render_sitemap(entries):
+    out = ['<?xml version="1.0" encoding="UTF-8"?>',
+           '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
+    for loc, lastmod, freq in entries:
+        out.append("  <url>")
+        out.append("    <loc>%s%s</loc>" % (SITE, loc))
+        if lastmod:
+            out.append("    <lastmod>%s</lastmod>" % lastmod)
+        out.append("    <changefreq>%s</changefreq>" % freq)
+        out.append("  </url>")
+    out.append("</urlset>")
+    return "\n".join(out) + "\n"
+
+
+def build_sitemap(offline=False):
+    """Regenerate sitemap.xml.
+
+    Hand-kept sitemaps rot: this one silently missed /contributions/ and every
+    project page on the same host until 2026-08-01. Generating it from the same
+    list the checker walks is the only way it stays true.
+    """
+    entries = [(loc, git_date(src), freq) for loc, src, freq in OWN_PAGES]
+    for loc, repo, path, freq in PROJECT_PAGES:
+        entries.append((loc, None if offline else repo_date(repo, path), freq))
+    xml = render_sitemap(entries)
+    io.open(os.path.join(ROOT, "sitemap.xml"), "w", encoding="utf-8").write(xml)
+    print("sitemap.xml: %d urls (%d own, %d project pages)"
+          % (len(entries), len(OWN_PAGES), len(PROJECT_PAGES)))
+
+
+# ---------------------------------------------------------------- check
 def check():
     bad = []
     for rel in PAGES:
@@ -253,11 +338,23 @@ def check():
         miss = [l for l in REQUIRED_LINKS if 'href="%s"' % l not in s]
         if miss:
             bad.append((rel, "missing " + " ".join(miss)))
+    sm = os.path.join(ROOT, "sitemap.xml")
+    if not os.path.exists(sm):
+        bad.append(("sitemap.xml", "MISSING FILE"))
+    else:
+        xml = io.open(sm, encoding="utf-8").read()
+        for loc, _src, _f in OWN_PAGES:
+            if "<loc>%s%s</loc>" % (SITE, loc) not in xml:
+                bad.append(("sitemap.xml", "does not list " + loc))
+        for loc, _r, _p, _f in PROJECT_PAGES:
+            if "<loc>%s%s</loc>" % (SITE, loc) not in xml:
+                bad.append(("sitemap.xml", "does not list " + loc))
     for rel, why in bad:
         print("  FAIL %-34s %s" % (rel, why))
     if not bad:
         for rel in PAGES:
             print("  OK   %s" % rel)
+        print("  OK   sitemap.xml (%d urls)" % (len(OWN_PAGES) + len(PROJECT_PAGES)))
     return 1 if bad else 0
 
 
@@ -274,6 +371,7 @@ def main():
         io.open(out, "w", encoding="utf-8").write(render(items, stamp))
         print("contributions/index.html: %d PRs, generated %s" % (len(items), stamp))
         patch_counter(items)
+        build_sitemap()
     touched = [r for r in PAGES if os.path.exists(os.path.join(ROOT, r)) and inject_nav(r)]
     print("nav updated in:", touched or "nothing (already current)")
     sys.exit(check())

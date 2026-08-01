@@ -51,8 +51,27 @@ ck("some merged -> no 'None merged yet' line", "None merged yet" not in h)
 h3 = B.render([row("a/b", 1, "open", title='<script>x</script>&')], "s")
 ck("PR title is HTML-escaped", "&lt;script&gt;" in h3 and "<script>x" not in h3)
 
-print("\n%d/%d checks passed" % (13 + len(B.REQUIRED_LINKS) - len(fails) + 3 - 3,
-                                 13 + len(B.REQUIRED_LINKS)))
+# --- 4. sitemap: every declared page is listed, no invented dates -------
+sm = B.render_sitemap([("/", "2026-08-01", "weekly"),
+                       ("/claude-bible/", None, "monthly")])
+ck("sitemap is well-formed XML", sm.startswith('<?xml') and sm.rstrip().endswith("</urlset>"))
+ck("sitemap uses absolute URLs", "<loc>https://palo-alto-ai-research-lab.github.io/</loc>" in sm)
+ck("known date is written as lastmod", "<lastmod>2026-08-01</lastmod>" in sm)
+ck("unknown date omits lastmod, never guesses", sm.count("<lastmod>") == 1)
+
+import xml.etree.ElementTree as ET
+declared = ["https://palo-alto-ai-research-lab.github.io" + loc for loc, _s, _f in B.OWN_PAGES] + \
+           ["https://palo-alto-ai-research-lab.github.io" + loc for loc, _r, _p, _f in B.PROJECT_PAGES]
+full = B.render_sitemap([(loc, None, f) for loc, _s, f in B.OWN_PAGES] +
+                        [(loc, None, f) for loc, _r, _p, f in B.PROJECT_PAGES])
+locs = [e.text for e in ET.fromstring(full).iter("{http://www.sitemaps.org/schemas/sitemap/0.9}loc")]
+ck("sitemap parses as XML", len(locs) == len(declared))
+ck("every declared page reaches the sitemap", sorted(locs) == sorted(declared))
+ck("project pages on the same host are included", "/claude-bible/" in full and "/verbatim-citation-gate/" in full)
+ck("no duplicate URLs", len(set(locs)) == len(locs))
+
+print("\n%d/%d checks passed" % (13 + len(B.REQUIRED_LINKS) + 8 - len(fails),
+                                 13 + len(B.REQUIRED_LINKS) + 8))
 if fails:
     print("FAILED:", fails)
 sys.exit(1 if fails else 0)
