@@ -300,7 +300,10 @@ def render_sitemap(entries):
            '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for loc, lastmod, freq in entries:
         out.append("  <url>")
-        out.append("    <loc>%s%s</loc>" % (SITE, loc))
+        # Escaped even though today's paths are plain: one page added later with a
+        # query string or an ampersand would otherwise emit a sitemap that no
+        # crawler can parse, and nothing here would say so.
+        out.append("    <loc>%s</loc>" % esc(SITE + loc))
         if lastmod:
             out.append("    <lastmod>%s</lastmod>" % lastmod)
         out.append("    <changefreq>%s</changefreq>" % freq)
@@ -338,17 +341,35 @@ def check():
         miss = [l for l in REQUIRED_LINKS if 'href="%s"' % l not in s]
         if miss:
             bad.append((rel, "missing " + " ".join(miss)))
+    # The sitemap is PARSED, not grepped: a substring search calls a truncated file
+    # or a duplicated entry healthy, and a sitemap a crawler rejects is worth less
+    # than none at all.
     sm = os.path.join(ROOT, "sitemap.xml")
     if not os.path.exists(sm):
         bad.append(("sitemap.xml", "MISSING FILE"))
     else:
-        xml = io.open(sm, encoding="utf-8").read()
-        for loc, _src, _f in OWN_PAGES:
-            if "<loc>%s%s</loc>" % (SITE, loc) not in xml:
-                bad.append(("sitemap.xml", "does not list " + loc))
-        for loc, _r, _p, _f in PROJECT_PAGES:
-            if "<loc>%s%s</loc>" % (SITE, loc) not in xml:
-                bad.append(("sitemap.xml", "does not list " + loc))
+        import xml.etree.ElementTree as ET
+        try:
+            root = ET.parse(sm).getroot()
+        except Exception as e:
+            bad.append(("sitemap.xml", "does not parse as XML: %s" % e))
+            root = None
+        if root is not None:
+            ns = "{http://www.sitemaps.org/schemas/sitemap/0.9}"
+            if not root.tag.endswith("urlset"):
+                bad.append(("sitemap.xml", "root element is %s, not urlset" % root.tag))
+            found = [e.text for e in root.iter(ns + "loc")]
+            declared = [SITE + loc for loc, _s, _f in OWN_PAGES] + \
+                       [SITE + loc for loc, _r, _p, _f in PROJECT_PAGES]
+            for u in declared:
+                if u not in found:
+                    bad.append(("sitemap.xml", "does not list " + u))
+            for u in found:
+                if u not in declared:
+                    bad.append(("sitemap.xml", "lists an undeclared url " + str(u)))
+            dupes = set(u for u in found if found.count(u) > 1)
+            if dupes:
+                bad.append(("sitemap.xml", "duplicate url(s): " + " ".join(sorted(dupes))))
     for rel, why in bad:
         print("  FAIL %-34s %s" % (rel, why))
     if not bad:

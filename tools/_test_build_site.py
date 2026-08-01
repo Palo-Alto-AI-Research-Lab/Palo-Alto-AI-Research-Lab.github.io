@@ -70,8 +70,45 @@ ck("every declared page reaches the sitemap", sorted(locs) == sorted(declared))
 ck("project pages on the same host are included", "/claude-bible/" in full and "/verbatim-citation-gate/" in full)
 ck("no duplicate URLs", len(set(locs)) == len(locs))
 
-print("\n%d/%d checks passed" % (13 + len(B.REQUIRED_LINKS) + 8 - len(fails),
-                                 13 + len(B.REQUIRED_LINKS) + 8))
+# --- 5. a URL needing escapes must not produce unparseable XML ----------
+# (found by an external review, 2026-08-01: <loc> was interpolated raw)
+nasty = B.render_sitemap([("/x?a=1&b=<bad>", None, "weekly")])
+ck("ampersand in a URL is escaped", "&amp;" in nasty and "?a=1&b=" not in nasty)
+try:
+    ET.fromstring(nasty); parsed = True
+except Exception:
+    parsed = False
+ck("sitemap with a nasty URL still parses", parsed)
+
+# --- 6. the checker must reject a broken sitemap, not grep past it ------
+import tempfile, shutil
+tmp = tempfile.mkdtemp()
+real_root = B.ROOT
+try:
+    for rel in B.PAGES:                      # satisfy the page half of check()
+        d = os.path.join(tmp, os.path.dirname(rel))
+        if d and not os.path.isdir(d): os.makedirs(d)
+        body = '<div class="sitenav">' + "".join('<a href="%s">x</a>' % l for l in B.REQUIRED_LINKS) + "</div>"
+        open(os.path.join(tmp, rel), "w").write(body)
+    B.ROOT = tmp
+
+    def with_sitemap(text):
+        open(os.path.join(tmp, "sitemap.xml"), "w").write(text)
+        return B.check()
+
+    good = B.render_sitemap([(loc, None, f) for loc, _s, f in B.OWN_PAGES] +
+                            [(loc, None, f) for loc, _r, _p, f in B.PROJECT_PAGES])
+    ck("checker passes a complete sitemap", with_sitemap(good) == 0)
+    ck("checker fails on truncated XML", with_sitemap(good.replace("</urlset>", "")) == 1)
+    ck("checker fails on a duplicated url", with_sitemap(good.replace("</urlset>", good.split("<urlset")[1].split(">",1)[1].split("</urlset>")[0].strip().split("</url>")[0] + "</url>\n</urlset>")) == 1)
+    ck("checker fails on a missing page", with_sitemap(B.render_sitemap(
+        [(loc, None, f) for loc, _s, f in B.OWN_PAGES])) == 1)
+finally:
+    B.ROOT = real_root
+    shutil.rmtree(tmp, ignore_errors=True)
+
+print("\n%d/%d checks passed" % (13 + len(B.REQUIRED_LINKS) + 14 - len(fails),
+                                 13 + len(B.REQUIRED_LINKS) + 14))
 if fails:
     print("FAILED:", fails)
 sys.exit(1 if fails else 0)
