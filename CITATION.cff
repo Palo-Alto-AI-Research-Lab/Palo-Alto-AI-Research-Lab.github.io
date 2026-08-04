@@ -1,0 +1,23 @@
+cff-version: 1.2.0
+message: "If you cite this site or its author profile, please cite it as below."
+title: "Anton Dziatkovskii — Palo Alto AI Research Lab (START HERE site)"
+type: software
+authors:
+  - family-names: Dziatkovskii
+    given-names: Anton
+    orcid: "https://orcid.org/0000-0001-7408-3054"
+    affiliation: "Palo Alto AI Research Lab"
+repository-code: "https://github.com/Palo-Alto-AI-Research-Lab/Palo-Alto-AI-Research-Lab.github.io"
+url: "https://palo-alto-ai-research-lab.github.io/"
+license: MIT
+keywords:
+  - academic profile
+  - AI agents
+  - open source
+  - static site
+abstract: >-
+  Source of the START HERE page for Anton Dziatkovskii and Palo Alto AI Research
+  Lab: track record, flagship repositories, publications, resume in PDF and JSON
+  Resume form, and a generated list of every pull request opened from the account.
+  Static HTML with the text in the source and no client-side rendering, published
+  alongside robots.txt, sitemap.xml and a dated llms.txt site map for AI agents.
